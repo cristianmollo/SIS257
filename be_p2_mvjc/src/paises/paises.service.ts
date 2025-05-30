@@ -6,13 +6,14 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-
 export class PaisesService {
-  constructor(@InjectRepository(Paise) private paisesRepository: Repository<Paise>) {}
-  
+  constructor(
+    @InjectRepository(Paise) private paisesRepository: Repository<Paise>,
+  ) {}
+
   async create(createPaiseDto: CreatePaiseDto): Promise<Paise> {
-    const existe = await this.paisesRepository.findOneBy({ 
-      descripcion: createPaiseDto.descripcion.trim() 
+    const existe = await this.paisesRepository.findOneBy({
+      descripcion: createPaiseDto.descripcion.trim(),
     });
     if (existe) {
       throw new ConflictException('El país ya existe');
@@ -28,7 +29,7 @@ export class PaisesService {
 
   async findOne(id: number): Promise<Paise> {
     const pais = await this.paisesRepository.findOneBy({ id });
-    if (!pais) { 
+    if (!pais) {
       throw new ConflictException(`El país con id ${id} no existe`);
     }
     return pais;
@@ -40,7 +41,7 @@ export class PaisesService {
     return this.paisesRepository.save(paisUpdate);
   }
 
-  async remove(id: number){
+  async remove(id: number) {
     const pais = await this.findOne(id);
     return this.paisesRepository.softRemove(pais);
   }

@@ -11,22 +11,24 @@ import {
 //id y descripcion (VARCHAR 30).
 @Entity('paises')
 export class Paise {
-    @PrimaryGeneratedColumn('identity')
-    id: number;
+  @PrimaryGeneratedColumn('identity')
+  id: number;
 
-    @Column('varchar', { length: 30 })
-    descripcion: string;
+  @Column('varchar', { length: 30 })
+  descripcion: string;
 
-    @CreateDateColumn({ name: 'fecha_creacion' })
-    fechaCreacion: Date;
+  @Column('varchar', { length: 30, name: 'idioma_principal' })
+  idiomaPrincipal: string;
 
-    @UpdateDateColumn({ name: 'fecha_modificacion' })
-    fechaModificacion: Date;
+  @CreateDateColumn({ name: 'fecha_creacion' })
+  fechaCreacion: Date;
 
-    @DeleteDateColumn({ name: 'fecha_eliminacion' })
-    fechaEliminacion: Date;
+  @UpdateDateColumn({ name: 'fecha_modificacion' })
+  fechaModificacion: Date;
 
-    @OneToMany(() => Series, (series) => series.pais)
-    series: Series[];
+  @DeleteDateColumn({ name: 'fecha_eliminacion' })
+  fechaEliminacion: Date;
 
+  @OneToMany(() => Series, (series) => series.pais)
+  series: Series[];
 }
