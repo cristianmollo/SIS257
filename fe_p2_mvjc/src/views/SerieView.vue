@@ -14,7 +14,7 @@ function handleCreate() {
 }
 
 function handleEdit(serie: any) {
-  serieEdit.value = { ...serie }; // Asegúrate de copiar el objeto
+  serieEdit.value = { ...serie };
   mostrarDialog.value = true;
 }
 
